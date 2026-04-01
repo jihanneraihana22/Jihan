@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Tugas</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #fff0f5;
+            text-align: center;
+            margin: 0;
+        }
+
+        .hero {
+            padding: 40px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: #ff9a9e;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        input, textarea, select {
+            padding: 8px;
+            margin: 5px;
+            width: 200px;
+        }
+
+        img {
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        .section {
+            padding: 30px;
+        }
+
+        .box {
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- BIODATA LANGSUNG DI DEPAN -->
+<div class="hero">
+    <h1>Berliana Ivy</h1>
+    <p>Tugas Pemrograman Web</p>
+
+    <div class="box">
+        <h2>Form Biodata</h2>
+
+        <form id="formBiodata">
+            Nama:<br>
+            <input type="text" name="nama" required><br>
+
+            Kelas:<br>
+            <input type="text" name="kelas" required><br>
+
+            Alamat:<br>
+            <textarea name="alamat" required></textarea><br>
+
+            Tanggal Lahir:<br>
+            <select id="tgl">
+                <option>Tanggal</option>
+                <script>
+                    for(let i=1;i<=31;i++){
+                        document.write(`<option>${i}</option>`);
+                    }
+                </script>
+            </select>
+
+            <select id="bulan">
+                <option>Bulan</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option>
+                <option>10</option><option>11</option><option>12</option>
+            </select>
+
+            <select id="tahun">
+                <option>Tahun</option>
+                <script>
+                    for(let i=2000;i<=2026;i++){
+                        document.write(`<option>${i}</option>`);
+                    }
+                </script>
+            </select>
+
+            <br><br>
+            <button type="submit">Simpan</button>
+        </form>
+
+        <h3>Hasil Biodata</h3>
+        <p id="hasil"></p>
+    </div>
+
+    <button onclick="scrollToSection('soal1')">Soal 1</button>
+    <button onclick="scrollToSection('soal2')">Soal 2</button>
+</div>
+
+<!-- SOAL 1 -->
+<div class="section" id="soal1">
+    <h2>Soal 1 - XAMPP</h2>
+
+    <img src="img/xampp.png" width="300">
+    <img src="img/form1.png" width="300">
+    <img src="img/hasil1.png" width="300">
+</div>
+
+<!-- SOAL 2 -->
+<div class="section" id="soal2">
+    <h2>Soal 2 - Laragon</h2>
+
+    <img src="img/laragon.png" width="300">
+    <img src="img/form2.png" width="300">
+    <img src="img/hasil2.png" width="300">
+</div>
+
+<script>
+// SCROLL
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+// BIODATA
+document.getElementById("formBiodata").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let nama = document.querySelector("[name=nama]").value;
+    let kelas = document.querySelector("[name=kelas]").value;
+    let alamat = document.querySelector("[name=alamat]").value;
+
+    let tgl = document.getElementById("tgl").value;
+    let bulan = document.getElementById("bulan").value;
+    let tahun = document.getElementById("tahun").value;
+
+    let lahir = new Date(tahun, bulan-1, tgl);
+    let today = new Date();
+
+    let umur = today.getFullYear() - lahir.getFullYear();
+
+    document.getElementById("hasil").innerHTML =
+        "Nama: " + nama + "<br>" +
+        "Kelas: " + kelas + "<br>" +
+        "Alamat: " + alamat + "<br>" +
+        "Tanggal Lahir: " + tgl + "-" + bulan + "-" + tahun + "<br>" +
+        "Umur: " + umur + " Tahun";
+});
+</script>
+
+</body>
+</html>
